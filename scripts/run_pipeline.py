@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src.config import RAW_PATH, PROCESSED_PATH  # noqa: E402
-from src.utils import check_columns, basic_clean  # noqa: E402
+from src.utils import check_columns, basic_clean, quick_report  # noqa: E402
 
 
 def ensure_dir(path: str) -> None:
@@ -29,7 +29,7 @@ def main() -> None:
 
     # folders for outputs
     ensure_dir("figures")
-    ensure_dir("data/processed")
+    ensure_dir(os.path.dirname(PROCESSED_PATH) or "data/processed")
 
     # 1) load
     if not os.path.exists(RAW_PATH):
@@ -44,7 +44,7 @@ def main() -> None:
     # 2) validate + clean
     check_columns(df)
     df = basic_clean(df)
-    print("After clean rows:", len(df))
+    print("After clean:", quick_report(df))
 
     # 3) save processed
     df.to_csv(PROCESSED_PATH, index=False)
