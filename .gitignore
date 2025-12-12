@@ -1,0 +1,17 @@
+# virtual environments
+venv/
+.venv/
+
+# python
+__pycache__/
+*.pyc
+
+# jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# data (if large or private)
+# data/raw/
+# data/processed/
